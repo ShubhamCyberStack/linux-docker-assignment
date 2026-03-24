@@ -10,6 +10,7 @@ Created a new user `shubham` with sudo access:
 sudo adduser shubham
 sudo usermod -aG sudo shubham
 ```
+The -aG flag appends the user to the sudo group without removing existing groups
 
 Installed required packages:
 
@@ -176,7 +177,7 @@ sudo systemctl reload nginx
 Access application:
 
 ```
-http://<IP>
+http://13.201.123.84/
 ```
 
 **Explanation:**
