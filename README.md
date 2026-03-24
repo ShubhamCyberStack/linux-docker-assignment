@@ -1,6 +1,5 @@
 # Linux Setup and Docker Assignment
 
-This README documents the complete solution to the Linux setup, Docker deployment, Nginx configuration, troubleshooting, scripting, and short questions assignment. All steps were performed on an AWS Ubuntu EC2 instance. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)
 
 ## Task 1: Basic Linux Setup
 
@@ -124,27 +123,25 @@ Made executable: `chmod +x checksystem.sh` then ran `./checksystem.sh`. [ppl-ai-
 
 **1. Difference between Docker image and container**  
 - Docker Image: A read-only, static template that contains the application code, libraries, and dependencies required to run an application.  
-- Docker Container: A live, running instance of an image. If the image is the blueprint, the container is the actual building created from that blueprint. Containers are built with the help of image. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx)
+- Docker Container: A live, running instance of an image. If the image is the blueprint, the container is the actual building created from that blueprint. Containers are built with the help of image.
 
 **2. Difference between systemctl start and systemctl enable**  
 - `systemctl start`: Immediately starts a service for the current session, but it will not automatically start after a system reboot.  
-- `systemctl enable`: Configures the service to start automatically whenever the system boots up, but it does not start the service immediately in the current session. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx)
+- `systemctl enable`: Configures the service to start automatically whenever the system boots up, but it does not start the service immediately in the current session. [ppl-ai-file-upload.s3.amazonaws
 
 **3. What is Nginx Reverse Proxy used for?**  
-Nginx Reverse Proxy is used to sit in front of a web server and forward client requests to it. It is primarily used for security (hiding application ports), load balancing, and handling SSL termination. If needed, Nginx can also route traffic to different servers based on rules, balance the load across multiple servers, or terminate SSL so the backend doesn't have to handle encryption. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx)
+Nginx Reverse Proxy is used to sit in front of a web server and forward client requests to it. It is primarily used for security (hiding application ports), load balancing, and handling SSL termination. If needed, Nginx can also route traffic to different servers based on rules, balance the load across multiple servers, or terminate SSL so the backend doesn't have to handle encryption.
 
-**Screenshot suggestion:** Add screenshot of Nginx reverse proxy configuration here.
 
 **4. How do you check which process is using a port in Linux?**  
-You can use the `lsof` command e.g., `sudo lsof -i :8080` or the `ss` command e.g., `sudo ss -tulpn | grep :8080` to identify the Process ID (PID) and the name of the application using a specific port. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx)
+You can use the `lsof` command e.g., `sudo lsof -i :8080` or the `ss` command e.g., `sudo ss -tulpn | grep :8080` to identify the Process ID (PID) and the name of the application using a specific port. 
 
 **5. What is AWS EC2 used for?**  
-AWS EC2 (Elastic Compute Cloud) provides scalable, on-demand virtual servers in the cloud. It allows users to run applications, manage storage, and configure networking and security without needing physical hardware. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx)
+AWS EC2 (Elastic Compute Cloud) provides scalable, on-demand virtual servers in the cloud. It allows users to run applications, manage storage, and configure networking and security without needing physical hardware.
 
 **6. What is Jenkins used for?**  
-Jenkins is an open-source automation server used for Continuous Integration (CI) and Continuous Deployment (CD). It automates the parts of software development related to building, testing, and deploying, facilitating technical aspects of continuous delivery. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx)
+Jenkins is an open-source automation server used for Continuous Integration (CI) and Continuous Deployment (CD). It automates the parts of software development related to building, testing, and deploying, facilitating technical aspects of continuous delivery.
 
 **7. What is CodePipeline?**  
 AWS CodePipeline is a fully managed continuous delivery service that helps you automate your release pipelines for fast and reliable application and infrastructure updates. It coordinates the flow of code from source (like GitHub) through build and deployment stages. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx)
 
-**Screenshot suggestion:** Add screenshots showing command outputs for port checking (lsof/ss commands) here to visually demonstrate the answers. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx)
