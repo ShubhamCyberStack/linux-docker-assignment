@@ -32,8 +32,8 @@ sudo apt install docker-ce -y
 Verification commands:
 
 ```bash
-lsb_release -a
-curl ifconfig.me
+cat /etc/os-release  or  hostnamectl
+ifconfig             or curl ifconfig.me
 free -h
 df -h
 ```
