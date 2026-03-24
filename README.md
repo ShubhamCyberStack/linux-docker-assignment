@@ -1,123 +1,260 @@
 # Linux Setup and Docker Assignment
 
+---
 
 ## Task 1: Basic Linux Setup
 
-Created a new user 'shubham' with sudo access using `sudo adduser shubham` followed by `sudo usermod -aG sudo shubham`. The `-aG` flag appends the user to the sudo group without removing existing groups. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)
+Created a new user `shubham` with sudo access:
 
-Installed required packages: `sudo apt install git curl htop nginx` (or in one command: `sudo apt install git curl htop nginx -y`). For Docker on AWS Ubuntu EC2:  
-- `sudo apt install apt-transport-https ca-certificates curl software-properties-common -y`  
-- `curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -`  
-- `sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"`  
-- `sudo apt update`  
-- `sudo apt install docker-ce -y` [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)
+```bash
+sudo adduser shubham
+sudo usermod -aG sudo shubham
+```
 
-**Screenshots to add here:**  
-- OS version (e.g., `lsb_release -a` or `cat /etc/os-release`)  
-- IP address (e.g., `curl ifconfig.me` or AWS console)  
-- Memory usage (`htop` or `free -h`) and disk usage (`df -h`) [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)
+Installed required packages:
+
+```bash
+sudo apt update
+sudo apt install git curl htop nginx -y
+```
+
+Installed Docker:
+
+```bash
+sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt update
+sudo apt install docker-ce -y
+```
+
+Verification commands:
+
+```bash
+lsb_release -a
+curl ifconfig.me
+free -h
+df -h
+```
+
+**Screenshots:**
+
+<img width="870" height="385" alt="image" src="https://github.com/user-attachments/assets/6602be71-fa15-45f7-b765-1a24e8245d15" />
+
+<img width="780" height="408" alt="image" src="https://github.com/user-attachments/assets/621ec87d-004c-44a4-9ab5-206754e56b69" />
+
+<img width="630" height="503" alt="image" src="https://github.com/user-attachments/assets/456e556e-ddf5-4600-9a64-f02ebd6525fc" />
+
+<img width="825" height="143" alt="image" src="https://github.com/user-attachments/assets/9426f149-e29c-42c3-b95f-4ea2e72c10e7" />
+
+---
 
 ## Task 2: Service Management
 
-Started and enabled Nginx: `sudo systemctl start nginx` and `sudo systemctl enable nginx`. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)
+Started and enabled Nginx:
 
-Checked service status with `sudo systemctl status nginx`. Checked port 80 usage with `sudo lsof -i :80` or `sudo netstat -tulnp | grep :80`. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)
+```bash
+sudo systemctl start nginx
+sudo systemctl enable nginx
+```
 
-**Screenshot to add here:** Nginx status output and port check results. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)
+Checked service status:
+
+```bash
+sudo systemctl status nginx
+sudo systemctl is-active nginx
+sudo systemctl is-enabled nginx
+```
+
+Checked which process is using port 80:
+
+```bash
+sudo lsof -i :80
+sudo netstat -tulnp | grep :80
+```
+
+**Screenshot:**
+
+<img width="975" height="353" alt="image" src="https://github.com/user-attachments/assets/e8dd0da2-4709-491c-8346-042fcc35e4d1" />
+
+
+---
 
 ## Task 3: Docker Web App
 
-Created a simple Flask app in `app.py`:  
+Created Flask app (`app.py`):
+
 ```python
 from flask import Flask
+
 app = Flask(__name__)
+
 @app.route('/')
 def home():
     return 'Hello from my side!'
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
 ```
 
-**Dockerfile:**  
+Created `requirements.txt`:
+
 ```
+flask
+```
+
+Dockerfile:
+
+```dockerfile
 FROM python:3-slim
 WORKDIR /app
 COPY app.py .
-RUN pip install flask
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 CMD ["python", "app.py"]
 ```
 
-Built and ran: `docker build -t myapp .` then `docker run -d -p 5000:5000 myapp`. Verified access via browser at `http://<IP>:5000`. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)
+Build and run:
 
-**Screenshots to add here:**  
-- Dockerfile content  
-- Docker run output  
-- Browser access to the app [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)
+```bash
+docker build -t myapp .
+docker run -d -p 5000:5000 myapp
+```
+
+Verification:
+
+```bash
+docker ps
+docker images
+```
+
+Access application:
+
+```
+http://<IP>:5000
+```
+
+**Screenshots:**
+
+<img width="975" height="322" alt="image" src="https://github.com/user-attachments/assets/12e03bd3-a3a4-4385-bc0b-be7731276d65" />
+
+<img width="975" height="496" alt="image" src="https://github.com/user-attachments/assets/ca07d9ce-b0ac-4656-b9c8-99c3a52a1341" />
+
+
+---
 
 ## Task 4: Nginx Reverse Proxy
 
-Edited Nginx config (`sudo nano /etc/nginx/sites-available/default`): Added server block to proxy from port 80 to 5000:  
+Updated Nginx config:
+
+```bash
+sudo nano /etc/nginx/sites-available/default
 ```
+
+Configuration:
+
+```nginx
 server {
     listen 80;
+
     location / {
         proxy_pass http://localhost:5000;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
     }
 }
 ```
 
-Reloaded with `sudo systemctl reload nginx`. Verified at `http://<IP>` (e.g., http://13.201.123.84). [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)
+Reloaded Nginx:
 
-**Screenshots to add here:**  
-- Edited Nginx config file  
-- Reload command output  
-- Browser access via Nginx [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)
+```bash
+sudo systemctl reload nginx
+```
+
+Access application:
+
+```
+http://<IP>
+```
+
+**Explanation:**
+Nginx acts as a reverse proxy by forwarding requests from port 80 to the Flask app running on port 5000.
+
+**Screenshots:**
+
+<img width="975" height="210" alt="image" src="https://github.com/user-attachments/assets/6beb7164-888e-494e-8fad-974ef5a4f091" />
+
+<img width="735" height="327" alt="image" src="https://github.com/user-attachments/assets/b57d8c52-552c-41d4-b8c1-f1620dcd6a71" />
+
+<img width="780" height="414" alt="image" src="https://github.com/user-attachments/assets/5c020df1-7535-4ed5-ac4d-84b4e93fd61b" />
+
+
+---
 
 ## Task 5: Troubleshooting
 
-**Issue:** Application not opening due to "Unknown Database Error" (ER_BAD_DB_ERROR) in a Node.js app connecting to AWS RDS (carshowroom database missing). [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)
+**Issue:**
+Application failed with error `ER_BAD_DB_ERROR`
 
-**Diagnosis:** App crashed on start; checked logs for DB connection failure. Verified RDS endpoint but database didn't exist. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)
+**Root Cause:**
+Database `carshowroom` did not exist in AWS RDS
 
-**Fix:**  
-1. Installed MySQL client: `sudo apt install mysql-client -y`  
-2. Created DB: `mysql -h <RDS_ENDPOINT> -u admin -pShubham11 -e "CREATE DATABASE IF NOT EXISTS carshowroom;"`  
-3. Verified env vars (DBHOST, DBNAME, etc.)  
-4. Seeded data with `seed.js` script [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)
+**Fix:**
 
-**Verification:** Restarted app; accessed without errors. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)
+```bash
+sudo apt install mysql-client -y
+mysql -h <RDS_ENDPOINT> -u admin -p -e "CREATE DATABASE IF NOT EXISTS carshowroom;"
+```
 
-**Screenshot to add here:** Error logs, DB creation output, and successful app access. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)
+Steps taken:
+
+* Created missing database
+* Verified environment variables
+* Seeded database using script
+
+**Verification:**
+Application started successfully and worked without errors.
+
+
+
+---
 
 ## Task 6: Basic Script
 
-Created `checksystem.sh`:  
+Created `checksystem.sh`:
+
+nano checksystem.sh
+
 ```bash
 #!/bin/bash
+
 echo "Disk usage:"
 df -h
+
 echo "Memory usage:"
 free -h
+
 echo "Nginx status:"
-sudo systemctl status nginx --no-pager
+systemctl is-active nginx
+
 echo "App port (5000) listening?"
-sudo ss -tulpn | grep :5000
+ss -tulpn | grep :5000
 ```
 
-Made executable: `chmod +x checksystem.sh` then ran `./checksystem.sh`. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)
+Made executable and ran:
 
-**Screenshot to add here:** Script content and execution output. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)
+```bash
+chmod +x checksystem.sh
 
-## Task 7: Short Questions
+./checksystem.sh
+```
+<img width="690" height="365" alt="image" src="https://github.com/user-attachments/assets/cff69708-a41c-4a6d-b859-6c724d0ec434" />
 
-- **Docker image vs container:** Image is a read-only static template (blueprint with code/libraries). Container is a runnable instance of the image. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)
-- **systemctl start vs enable:** `start` runs service now (current session only). `enable` sets auto-start on boot (doesn't start immediately). [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)
-- **Nginx reverse proxy:** Forwards client requests to backend servers; used for security (hide ports), load balancing, SSL termination. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)
-- **Check port process:** `sudo lsof -i :<port>` or `sudo ss -tulpn | grep :<port>`. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)  
-- **AWS EC2:** Scalable on-demand virtual servers for running apps, storage, networking without physical hardware. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)
-- **Jenkins:** Open-source CI/CD automation server for building, testing, deploying code. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx?AWSAccessKeyId=ASIA2F3EMEYEUQXWQRZM&Signature=dv3g%2BGcJqiqaJ6ZS4y%2BfnyeShzk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjENP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJHMEUCIQDC0Eb2wc8wI%2BQorNjQd93mO07mK38r3LALLItBOMSkxAIgGXlhOb2fy17ZBxZoPX5gs4niK4N6FJOtxlHBtk9iXmcq%2FAQInP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDMhd8s9B3RPzW%2Fs9YyrQBFC5WIqC7cGXC%2BDzuC1I6bwJVFlwD21xTZ%2FzA%2FNYsXvSpeEY6Hl0kHtaVx3El0PVAg3BtRXApn2sQrR2n5fvFnbU9NGaK%2FVj5IlwJl90pTNuAgII5TCvaDnnBqqUFBHSevcmic%2BQhu6RZkq%2BCYwXPWRQKOG0hDDfM57V7o1ohHNQ596fQpainfbC7aAQPNk%2BOLUagxYtU1skEFZsC7Ennxf%2B3QkUWkbIJ7tlLY72S%2FLRk1arNLwgiabil4QLQxXI7iqVx%2F6mKtygiLfkxZlfjalTvrnx%2B%2BoxgWDUM8xhiRiMWbj9%2BckmocTYGmYqoZ2rbfjcJJA8UQM%2B2LLbgsWiCDsIb8r1B5xmZ3NPOQpHoNdpYOsKKFzvvqSlcYndU1dKQz%2BqF5r%2FOegKdLanUVB46r7k4bBLuXm3eCeppxVgDkHLUGBPafo3%2BT9PU5W1VNhEXWuuov26WWiPU7tZBlBIWHV48R7qkAFtw6K4hgy2kbkoXwcbgUBHBSBU1zN%2FfvmQqypvV40Kf1KpfcyOE6NyQoFQT3l3YJoYIFdvNLbhQJb65LYVQLZKDtnNFd2PsuPWelptZUSTTC5D6dPv55Y%2Fsqc%2BVFYco8pYnLgsuiy4Aii86nUGVnK8XwNpNaWnsOCAJJd6VmmfGoZ0ujVFiQBhxx5%2FNN0xaC6ypeDerreTyaPfnFTOeo7U2F6kLRq1IcxpxaNnIAmcoSsWwnILxP8%2BKqN6H4bSD%2B%2FBxWDb6GJdcek5ME1l%2BQ%2F42cCrqowR0W5TSVByOMKdAEKefBTzrAfgV%2BAwpLmLzgY6mAH1dTAl%2FQhEx5yyMMGYSGttuIqOxunmDOEPKKqBTEuqLO6q9poIuP%2FzgX9WSIEoccr9Skr6WQ2BkFRRPFaHJCXaBnmSThoKT%2BYgIpD3anRc9rpR9Ru%2BGIW%2BG%2B9gzj5Mfx189ZZn7Pqm%2BvMTfvXNgr8cQoPA7I%2B%2BqaWNk1Arlo1hUI4eczPCyrJpreDNlvAHekkfKOJkugDKuw%3D%3D&Expires=1774379667)
+<img width="690" height="261" alt="image" src="https://github.com/user-attachments/assets/ca5a78a3-79b1-4df4-9816-705d17be3b84" />
+
+---
 
 ## Task 7: Short Questions
 
@@ -127,7 +264,7 @@ Made executable: `chmod +x checksystem.sh` then ran `./checksystem.sh`. [ppl-ai-
 
 **2. Difference between systemctl start and systemctl enable**  
 - `systemctl start`: Immediately starts a service for the current session, but it will not automatically start after a system reboot.  
-- `systemctl enable`: Configures the service to start automatically whenever the system boots up, but it does not start the service immediately in the current session. [ppl-ai-file-upload.s3.amazonaws
+- `systemctl enable`: Configures the service to start automatically whenever the system boots up, but it does not start the service immediately in the current session. 
 
 **3. What is Nginx Reverse Proxy used for?**  
 Nginx Reverse Proxy is used to sit in front of a web server and forward client requests to it. It is primarily used for security (hiding application ports), load balancing, and handling SSL termination. If needed, Nginx can also route traffic to different servers based on rules, balance the load across multiple servers, or terminate SSL so the backend doesn't have to handle encryption.
@@ -143,5 +280,6 @@ AWS EC2 (Elastic Compute Cloud) provides scalable, on-demand virtual servers in 
 Jenkins is an open-source automation server used for Continuous Integration (CI) and Continuous Deployment (CD). It automates the parts of software development related to building, testing, and deploying, facilitating technical aspects of continuous delivery.
 
 **7. What is CodePipeline?**  
-AWS CodePipeline is a fully managed continuous delivery service that helps you automate your release pipelines for fast and reliable application and infrastructure updates. It coordinates the flow of code from source (like GitHub) through build and deployment stages. [ppl-ai-file-upload.s3.amazonaws](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/92356398/0056f52b-d77c-48c5-aae5-a30758784003/AssignmentGR.docx)
+AWS CodePipeline is a fully managed continuous delivery service that helps you automate your release pipelines for fast and reliable application and infrastructure updates. It coordinates the flow of code from source (like GitHub) through build and deployment stages. [ppl-ai-file-upload.s3.amazonaws
+
 
